@@ -19,7 +19,8 @@ class StubOpenAIClient:
         return self.response
 
 
-def test_chat_returns_a_research_brief() -> None:
+def test_chat_returns_a_research_brief(caplog) -> None:
+    caplog.set_level("INFO")
     stub_client = StubOpenAIClient()
     app.dependency_overrides[get_openai_client] = lambda: stub_client
 
@@ -32,6 +33,8 @@ def test_chat_returns_a_research_brief() -> None:
     assert response.json() == {"response": "Research brief"}
     assert stub_client.message == "What is Bitcoin?"
     assert stub_client.instructions == RESEARCH_BRIEF_INSTRUCTIONS
+    assert "outcome=success" in caplog.text
+    assert "What is Bitcoin?" not in caplog.text
 
 
 def test_chat_rejects_an_empty_message() -> None:
@@ -40,7 +43,7 @@ def test_chat_rejects_an_empty_message() -> None:
     assert response.status_code == 422
 
 
-def test_chat_returns_a_helpful_provider_error() -> None:
+def test_chat_returns_a_helpful_provider_error(caplog) -> None:
     app.dependency_overrides[get_openai_client] = lambda: StubOpenAIClient(response=None)
 
     try:
@@ -52,9 +55,11 @@ def test_chat_returns_a_helpful_provider_error() -> None:
     assert response.json() == {
         "detail": "The research service is temporarily unavailable. Please try again."
     }
+    assert "outcome=provider_error" in caplog.text
+    assert "What is Bitcoin?" not in caplog.text
 
 
-def test_chat_returns_a_helpful_configuration_error() -> None:
+def test_chat_returns_a_helpful_configuration_error(caplog) -> None:
     def unavailable_client() -> StubOpenAIClient:
         raise ConfigurationError("OPENAI_API_KEY is not configured")
 
@@ -67,3 +72,4 @@ def test_chat_returns_a_helpful_configuration_error() -> None:
 
     assert response.status_code == 503
     assert response.json() == {"detail": "The research service is not configured yet."}
+    assert "outcome=configuration_error" in caplog.text

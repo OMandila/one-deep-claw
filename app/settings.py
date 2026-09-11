@@ -13,6 +13,8 @@ class Settings:
     openai_api_key: str
     openai_model: str
     openai_timeout_seconds: float
+    openai_max_retries: int
+    openai_max_output_tokens: int
 
 
 def get_settings() -> Settings:
@@ -28,4 +30,6 @@ def get_settings() -> Settings:
         openai_api_key=api_key,
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
         openai_timeout_seconds=float(os.getenv("OPENAI_TIMEOUT_SECONDS", "30")),
+        openai_max_retries=int(os.getenv("OPENAI_MAX_RETRIES", "2")),
+        openai_max_output_tokens=int(os.getenv("OPENAI_MAX_OUTPUT_TOKENS", "1200")),
     )

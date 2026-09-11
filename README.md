@@ -68,4 +68,10 @@ When the service is running, open `http://127.0.0.1:8000/docs` to view its inter
 
 Copy `.env.example` to `.env` before configuring OpenAI in the next development stage. Never commit `.env` because it will contain a private API key.
 
-`OPENAI_MODEL` defaults to `gpt-4.1-mini` and `OPENAI_TIMEOUT_SECONDS` defaults to `30` when those values are not set.
+`OPENAI_MODEL` defaults to `gpt-4.1-mini`, `OPENAI_TIMEOUT_SECONDS` defaults to `30`, `OPENAI_MAX_RETRIES` defaults to `2`, and `OPENAI_MAX_OUTPUT_TOKENS` defaults to `1200` when those values are not set.
+
+The service logs each chat outcome, latency, and request/response lengths. It deliberately does not log question text, model responses, or secrets.
+
+## Evaluating Answers
+
+Use [docs/evaluation.md](docs/evaluation.md) to assess the research brief before relying on a new prompt, model, or data source. Do not treat model-only answers as current market data.

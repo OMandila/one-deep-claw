@@ -12,7 +12,7 @@ def test_openai_client_returns_the_sdk_output_text() -> None:
     responses = Mock()
     responses.create.return_value = SimpleNamespace(output_text="Research brief")
     sdk_client = cast(OpenAI, SimpleNamespace(responses=responses))
-    settings = Settings("test-key", "test-model", 15.0)
+    settings = Settings("test-key", "test-model", 15.0, 1, 500)
 
     client = OpenAIClient(settings, client=sdk_client)
 
@@ -21,4 +21,5 @@ def test_openai_client_returns_the_sdk_output_text() -> None:
         model="test-model",
         instructions="Be concise.",
         input="What is Bitcoin?",
+        max_output_tokens=500,
     )
