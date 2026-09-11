@@ -1,7 +1,10 @@
 from typing import Annotated
+from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from openai import OpenAIError
 from pydantic import BaseModel, Field
 
@@ -9,6 +12,8 @@ from app.openai_client import OpenAIClient
 from app.settings import ConfigurationError, get_settings
 
 app = FastAPI(title="One Deep Claw", version="0.1.0")
+STATIC_DIRECTORY = Path(__file__).parent / "static"
+app.mount("/static", StaticFiles(directory=STATIC_DIRECTORY), name="static")
 
 RESEARCH_BRIEF_INSTRUCTIONS = """You are One Deep Claw, a crypto and tokenised-stock
 market-research assistant. Give a concise educational research brief. State important
@@ -45,6 +50,11 @@ def configuration_error_handler(
 @app.get("/health")
 def health_check() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/", include_in_schema=False)
+def index() -> FileResponse:
+    return FileResponse(STATIC_DIRECTORY / "index.html")
 
 
 @app.post("/chat", response_model=ChatResponse)

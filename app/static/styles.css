@@ -1,0 +1,80 @@
+:root {
+  --ink: #172126;
+  --muted: #69767a;
+  --paper: #f4f1e8;
+  --lime: #c9ec4c;
+  --coral: #f26d4f;
+  --line: #c9cbc1;
+  --white: #fffdf7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--paper);
+  background-image: linear-gradient(rgba(23, 33, 38, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 33, 38, .045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  margin: 0;
+}
+
+button, textarea { font: inherit; }
+
+.workspace { margin: 0 auto; max-width: 1180px; min-height: 100vh; padding: 26px 30px 18px; }
+
+.masthead { align-items: center; border-bottom: 1px solid var(--ink); display: flex; justify-content: space-between; padding-bottom: 18px; }
+.brand { color: var(--ink); font-family: "Courier New", monospace; font-size: 15px; font-weight: bold; letter-spacing: 1.4px; text-decoration: none; }
+.status { align-items: center; display: flex; font-family: "Courier New", monospace; font-size: 12px; gap: 7px; text-transform: uppercase; }
+.status i { background: #37a65a; border-radius: 50%; display: block; height: 8px; width: 8px; }
+
+.intro { max-width: 720px; padding: 72px 0 42px; }
+.eyebrow, .panel-label, .brief-label { font-family: "Courier New", monospace; font-size: 11px; font-weight: bold; letter-spacing: 1.1px; margin: 0; text-transform: uppercase; }
+.eyebrow { color: var(--coral); }
+h1 { font-size: clamp(42px, 6vw, 76px); font-weight: normal; letter-spacing: 0; line-height: .96; margin: 14px 0 19px; }
+.lede { color: #425056; font-size: 19px; line-height: 1.45; margin: 0; max-width: 570px; }
+
+.research-shell { border: 1px solid var(--ink); display: grid; grid-template-columns: 250px minmax(0, 1fr); min-height: 510px; }
+.signal-panel { background: var(--lime); border-right: 1px solid var(--ink); display: flex; flex-direction: column; padding: 24px 20px; }
+.signal-row { border-bottom: 1px solid rgba(23, 33, 38, .28); display: grid; font-family: "Courier New", monospace; font-size: 11px; gap: 7px; padding: 16px 0; }
+.signal-row span { color: #435245; }
+.signal-row strong { font-size: 13px; text-transform: uppercase; }
+.panel-note { font-size: 14px; line-height: 1.35; margin: auto 0 0; }
+
+.chat-panel { background: var(--white); display: flex; flex-direction: column; min-width: 0; padding: 25px; }
+.messages { flex: 1; min-height: 205px; }
+.brief { animation: rise .32s ease-out; border-left: 4px solid var(--coral); max-width: 730px; padding: 4px 0 5px 17px; }
+.brief h2 { font-size: 29px; font-weight: normal; line-height: 1.05; margin: 13px 0 10px; }
+.brief p:not(.brief-label) { color: #4a595e; font-size: 16px; line-height: 1.45; margin: 0; }
+.brief-label { color: var(--coral); }
+.user-question { color: var(--muted); font-family: "Courier New", monospace; font-size: 12px; line-height: 1.45; margin: 0 0 22px; text-transform: uppercase; }
+.answer { white-space: pre-wrap; }
+.error-brief { border-left-color: var(--coral); }
+
+.suggestions { display: flex; flex-wrap: wrap; gap: 7px; margin: 26px 0 12px; }
+.suggestions button { background: transparent; border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-family: "Courier New", monospace; font-size: 11px; min-height: 32px; padding: 7px 10px; text-transform: uppercase; }
+.suggestions button:hover, .suggestions button:focus-visible { background: var(--lime); border-color: var(--ink); }
+
+.composer { border-top: 1px solid var(--ink); padding-top: 13px; }
+textarea { background: transparent; border: 0; color: var(--ink); font-size: 18px; line-height: 1.38; outline: none; resize: vertical; width: 100%; }
+textarea::placeholder { color: #8d9695; }
+.composer-footer { align-items: center; display: flex; font-family: "Courier New", monospace; font-size: 11px; justify-content: space-between; }
+#character-count { color: var(--muted); }
+#send-button { background: var(--ink); border: 1px solid var(--ink); color: var(--white); cursor: pointer; font-family: "Courier New", monospace; font-size: 12px; min-height: 38px; padding: 10px 14px; text-transform: uppercase; }
+#send-button:hover, #send-button:focus-visible { background: var(--coral); border-color: var(--coral); }
+#send-button:disabled { cursor: wait; opacity: .6; }
+footer { color: var(--muted); font-family: "Courier New", monospace; font-size: 11px; padding: 19px 0 0; text-align: center; }
+.sr-only { height: 1px; margin: -1px; overflow: hidden; position: absolute; width: 1px; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 700px) {
+  .workspace { padding: 18px 15px 15px; }
+  .intro { padding: 52px 0 30px; }
+  .research-shell { grid-template-columns: 1fr; }
+  .signal-panel { border-bottom: 1px solid var(--ink); border-right: 0; gap: 10px; padding: 16px; }
+  .signal-row { display: inline-flex; justify-content: space-between; padding: 8px 0; }
+  .panel-note { margin: 10px 0 0; }
+  .chat-panel { min-height: 440px; padding: 18px; }
+  .suggestions { margin-top: 16px; }
+}

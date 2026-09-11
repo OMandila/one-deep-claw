@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A crypto and tokenised-stock market research workspace.">
+    <title>One Deep Claw</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <main class="workspace">
+      <header class="masthead">
+        <a class="brand" href="/" aria-label="One Deep Claw home">ONE DEEP CLAW</a>
+        <span class="status"><i></i>Research mode</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">MARKET RESEARCH WORKSPACE</p>
+        <h1 id="page-title">Form a sharper market view.</h1>
+        <p class="lede">Ask about a crypto asset or tokenised stock. Receive a concise brief with scenarios, uncertainty, and risks.</p>
+      </section>
+
+      <section class="research-shell" aria-label="Market research chat">
+        <aside class="signal-panel">
+          <p class="panel-label">Research lens</p>
+          <div class="signal-row"><span>SCENARIOS</span><strong>Three-sided</strong></div>
+          <div class="signal-row"><span>TIME HORIZON</span><strong>Specified</strong></div>
+          <div class="signal-row"><span>CONVICTION</span><strong>Qualified</strong></div>
+          <p class="panel-note">Live market, on-chain, and sentiment feeds are not connected in this version.</p>
+        </aside>
+
+        <div class="chat-panel">
+          <div id="messages" class="messages" aria-live="polite">
+            <article class="brief welcome-brief">
+              <p class="brief-label">ONE DEEP CLAW / INITIAL BRIEF</p>
+              <h2>What would you like to examine?</h2>
+              <p>Ask a focused question and include the asset and time horizon that matter to you.</p>
+            </article>
+          </div>
+
+          <div class="suggestions" aria-label="Example research questions">
+            <button type="button" data-prompt="Summarise Bitcoin's market position and plausible scenarios over the next day.">BTC: next-day scenarios</button>
+            <button type="button" data-prompt="What evidence could support continuation or reversal after Ether's recent move?">ETH: continuation or reversal</button>
+            <button type="button" data-prompt="What should I examine when assessing a token's market momentum?">Assess token momentum</button>
+          </div>
+
+          <form id="chat-form" class="composer">
+            <label class="sr-only" for="message">Your research question</label>
+            <textarea id="message" name="message" rows="3" maxlength="4000" placeholder="Ask a market research question..." required></textarea>
+            <div class="composer-footer">
+              <span id="character-count">0 / 4000</span>
+              <button id="send-button" type="submit">Generate brief <span aria-hidden="true">-></span></button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer>Research information only. Not financial, investment, tax, or legal advice.</footer>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
