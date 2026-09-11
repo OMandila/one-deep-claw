@@ -67,3 +67,5 @@ uvicorn app.main:app --reload
 When the service is running, open `http://127.0.0.1:8000/docs` to view its interactive API documentation. The health endpoint is available at `http://127.0.0.1:8000/health`.
 
 Copy `.env.example` to `.env` before configuring OpenAI in the next development stage. Never commit `.env` because it will contain a private API key.
+
+`OPENAI_MODEL` defaults to `gpt-4.1-mini` and `OPENAI_TIMEOUT_SECONDS` defaults to `30` when those values are not set.
